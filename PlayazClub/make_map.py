@@ -39,7 +39,7 @@ for ind in ind_order:
     {
         "id": " """ + str(ind) +""" ",
         "title": " """ + city_feature['properties']['quote_name'] + """ ",
-        "description": "'""" + city_feature['properties']['quote'].encode('utf-8') + """'",
+        "description": \"""" + city_feature['properties']['quote'].encode('utf-8') + """\",
         "camera": {
             center: [""" + str(city_feature['geometry']['coordinates'][0]) + ', ' + str(city_feature['geometry']['coordinates'][1]) + """],
             zoom: """ + str(city_feature['properties']['zoom']) + """,
@@ -93,7 +93,7 @@ locations_string = """
 <div class='map-overlay-container'>
   <div class='map-overlay'>
     <h2 id='location-title'></h2>
-    <p id='location-description'></p>
+    <p>&#9835; &#34;<span id='location-description'></span>&#34; &#9835;</p>
     <small>Text credit: <a target='_blank' href='https://play.google.com/music/preview/Tr5rb4wvhquxz2fa2be56wntsm4?lyrics=1&utm_source=google&utm_medium=search&utm_campaign=lyrics&pcampaignid=kp-lyrics'>Google Play</a></small>
   </div>
 </div>
