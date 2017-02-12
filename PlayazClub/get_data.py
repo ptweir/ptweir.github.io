@@ -74,8 +74,6 @@ quotes = ["Where your Playaz Club at 4? My Playaz Club right in the heart of Fil
 "Yeah, but a special shot goes out to the Playaz Club right across the water in the Biggity Biggity O",
 "Uh, I feel you boy, where yours at Fly? Man, on the corner of Third and Newcomb right in the heart of H.P."]
 
-no_geocode = {}
-
 city_features = []
 for place_ind, place_name in enumerate(place_names):
     quote_name = quote_names[place_ind]
