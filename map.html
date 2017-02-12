@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<style>
+.map-overlay-container {
+    position: absolute;
+    width: 25%;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    z-index: 1;
+}
+
+.map-overlay {
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 10px;
+    box-shadow:0 1px 2px rgba(0,0,0,0.20);
+}
+
+.map-overlay h2,
+.map-overlay p {
+    margin: 0 0 10px;
+}
+</style>
+
+<div id='map'></div>
+
+<div class='map-overlay-container'>
+  <div class='map-overlay'>
+    <h2 id='location-title'></h2>
+    <p id='location-description'></p>
+    <small>Text credit: <a target='_blank' href='https://play.google.com/music/preview/Tr5rb4wvhquxz2fa2be56wntsm4?lyrics=1&utm_source=google&utm_medium=search&utm_campaign=lyrics&pcampaignid=kp-lyrics'>Google Play</a></small>
+  </div>
+</div>
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoicHR3IiwiYSI6ImNpeHNodXh6dzAwMGMyd29jc3o0N3l2am4ifQ.IUyNISmPOGZJNdxuiyKrmA';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v9',
+    center: [-100, 40],
+    maxZoom: 15,
+    minZoom: 3,
+    zoom: 4
+});
+
+var title = document.getElementById('location-title');
+var description = document.getElementById('location-description');
+
+var locations = [
+    {
+        "id": " 0 ",
+        "title": " Fillmoe (Fillmore) ",
+        "description": "'Where your Playaz Club at 4? My Playaz Club right in the heart of Fillmoe'",
+        "camera": {
+            center: [-122.432764, 37.783555],
+            zoom: 14.9700598802,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 4 ",
+        "title": " Army Street (now Cesar Chavez) ",
+        "description": "'Lakeview, P.H. and Army Street, a different part of town, A different kind of freak'",
+        "camera": {
+            center: [-122.42484, 37.747836],
+            zoom: 14.9700598802,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 21 ",
+        "title": " H.P. (Hunters Point) ",
+        "description": "'Uh, I feel you boy, where yours at Fly? Man, on the corner of Third and Newcomb right in the heart of H.P.'",
+        "camera": {
+            center: [-122.390982, 37.735915],
+            zoom: 14.9700598802,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 1 ",
+        "title": " Sunnydale ",
+        "description": "'Fillmoe, H.P. and Sunnydale, there's a playaz club everywhere you dwell'",
+        "camera": {
+            center: [-122.416424, 37.71202],
+            zoom: 14.9700598802,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 2 ",
+        "title": " Lakeview ",
+        "description": "'Lakeview, P.H. and Army Street, a different part of town, A different kind of freak'",
+        "camera": {
+            center: [-122.452412, 37.717451],
+            zoom: 14.9700598802,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 16 ",
+        "title": " P.A. (Palo Alto) ",
+        "description": "'P.A., V-Town, Richmond, Sacramento'",
+        "camera": {
+            center: [-122.1634, 37.4422],
+            zoom: 13.4556901731,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 14 ",
+        "title": " Bakersfield ",
+        "description": "'Yeah, but we gonna move on down to these Playaz Clubs close to home like Seattle, L.A., Bakersfield, San Diego'",
+        "camera": {
+            center: [-119.0195, 35.3739],
+            zoom: 8.62753208186,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 13 ",
+        "title": " L.A. ",
+        "description": "'Yeah, but we gonna move on down to these Playaz Clubs close to home like Seattle, L.A., Bakersfield, San Diego'",
+        "camera": {
+            center: [-118.2439, 34.0544],
+            zoom: 10.6524934941,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 15 ",
+        "title": " San Diego ",
+        "description": "'Yeah, but we gonna move on down to these Playaz Clubs close to home like Seattle, L.A., Bakersfield, San Diego'",
+        "camera": {
+            center: [-117.1628, 32.7174],
+            zoom: 10.6736646457,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 5 ",
+        "title": " Arizona ",
+        "description": "'I'd rather kick it with the crew in Arizona, They chop game like we do in California'",
+        "camera": {
+            center: [-111.668128, 34.168451],
+            zoom: 7,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 11 ",
+        "title": " Texas ",
+        "description": "'Shit, Detroit, New York, Texas'",
+        "camera": {
+            center: [-99.683617, 31.169621],
+            zoom: 7,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 8 ",
+        "title": " Atlanta ",
+        "description": "'You know they got one out there in Atlanta, the way they by choppin'",
+        "camera": {
+            center: [-84.3902, 33.7491],
+            zoom: 10.3070113773,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 7 ",
+        "title": " Philly (Philadelphia) ",
+        "description": "'What about that one they got out there in Philly, Fo?'",
+        "camera": {
+            center: [-75.1327, 40.0115],
+            zoom: 11.2094133578,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 10 ",
+        "title": " New York ",
+        "description": "'Shit, Detroit, New York, Texas'",
+        "camera": {
+            center: [-73.9808, 40.7648],
+            zoom: 9.62280534712,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 9 ",
+        "title": " Detroit ",
+        "description": "'Shit, Detroit, New York, Texas'",
+        "camera": {
+            center: [-83.0567, 42.3487],
+            zoom: 10.2135238026,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 6 ",
+        "title": " Chicago ",
+        "description": "'I know they got a Playaz Club out there in Chicago'",
+        "camera": {
+            center: [-87.6244, 41.8756],
+            zoom: 10.8556729683,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 12 ",
+        "title": " Seattle ",
+        "description": "'Yeah, but we gonna move on down to these Playaz Clubs close to home like Seattle, L.A., Bakersfield, San Diego'",
+        "camera": {
+            center: [-122.3301, 47.6038],
+            zoom: 12.3211481474,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 19 ",
+        "title": " Sacramento ",
+        "description": "'P.A., V-Town, Richmond, Sacramento'",
+        "camera": {
+            center: [-121.2981, 38.4732],
+            zoom: 10.7757922671,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 17 ",
+        "title": " V-Town (Vallejo) ",
+        "description": "'P.A., V-Town, Richmond, Sacramento'",
+        "camera": {
+            center: [-122.2566, 38.1041],
+            zoom: 11.5722880487,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 18 ",
+        "title": " Richmond ",
+        "description": "'P.A., V-Town, Richmond, Sacramento'",
+        "camera": {
+            center: [-122.3477, 37.9358],
+            zoom: 13.15847166,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 20 ",
+        "title": " Biggity Biggity O (Oakland) ",
+        "description": "'Yeah, but a special shot goes out to the Playaz Club right across the water in the Biggity Biggity O'",
+        "camera": {
+            center: [-122.2714, 37.8045],
+            zoom: 11.8269479135,
+            pitch: 50,
+            speed: 0.5
+        }
+    },
+    {
+        "id": " 3 ",
+        "title": " P.H. (Potrero Hill) ",
+        "description": "'Lakeview, P.H. and Army Street, a different part of town, A different kind of freak'",
+        "camera": {
+            center: [-122.410034, 37.76684],
+            zoom: 14.9700598802,
+            pitch: 50,
+            speed: 0.5
+        }
+    },];
+
+
+function playback(index) {
+    title.textContent = locations[index].title;
+    description.textContent = locations[index].description;
+
+    // Animate the map position based on camera properties
+    map.flyTo(locations[index].camera);
+
+    map.once('moveend', function() {
+        // Duration the slide is on screen after interaction
+        window.setTimeout(function() {
+            // Increment index
+            index = (index + 1 === locations.length) ? 0 : index + 1;
+            playback(index);
+        }, 3000); // After callback, show the location for 3 seconds.
+    });
+}
+
+// Display the last title/description first
+title.textContent = locations[locations.length - 1].title;
+description.textContent = locations[locations.length - 1].description;
+
+map.on('load', function() {
+
+    // Start the playback animation for each borough
+    playback(0);
+});
+</script>
+
+</body>
+</html>
+
