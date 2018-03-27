@@ -99,7 +99,7 @@ locations_string = """
 </div>
 
 <script>
-mapboxgl.accessToken = 'pk.eyJ1IjoicHR3IiwiYSI6ImNpeHNodXh6dzAwMGMyd29jc3o0N3l2am4ifQ.IUyNISmPOGZJNdxuiyKrmA';
+mapboxgl.accessToken = <mapbox token here;
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v9',
