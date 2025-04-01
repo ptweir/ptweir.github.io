@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids Drawing Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="drawing-pane">
+            <canvas id="drawingCanvas"></canvas>
+        </div>
+        <div class="color-picker-pane">
+            <div class="control-group">
+                <div class="color-section">
+                    <div class="color-options">
+                        <!-- Warm Colors -->
+                        <button class="color-btn" style="background-color: #FF355E" data-color="#FF355E"></button>
+                        <button class="color-btn" style="background-color: #FF69B4" data-color="#FF69B4"></button>
+                        <button class="color-btn" style="background-color: #FF7F50" data-color="#FF7F50"></button>
+                        <button class="color-btn" style="background-color: #FF8C00" data-color="#FF8C00"></button>
+                        <button class="color-btn" style="background-color: #FFD700" data-color="#FFD700"></button>
+                        <!-- Cool Colors -->
+                        <button class="color-btn" style="background-color: #2ECCB9" data-color="#2ECCB9"></button>
+                        <button class="color-btn" style="background-color: #00CED1" data-color="#00CED1"></button>
+                        <button class="color-btn" style="background-color: #1E90FF" data-color="#1E90FF"></button>
+                        <button class="color-btn" style="background-color: #4169E1" data-color="#4169E1"></button>
+                        <button class="color-btn" style="background-color: #8A2BE2" data-color="#8A2BE2"></button>
+                        <!-- Fresh/Fun Colors -->
+                        <button class="color-btn" style="background-color: #32CD32" data-color="#32CD32"></button>
+                        <button class="color-btn" style="background-color: #9FE2BF" data-color="#9FE2BF"></button>
+                        <button class="color-btn" style="background-color: #FF1493" data-color="#FF1493"></button>
+                        <button class="color-btn" style="background-color: #9B30FF" data-color="#9B30FF"></button>
+                        <button class="color-btn special-brush random-picker" data-color="random">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="#666" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                            </svg>
+                        </button>
+                        <button class="color-btn emoji-picker" data-color="emoji">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="#666" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-4-8c.79 0 1.5-.71 1.5-1.5S8.79 9 8 9s-1.5.71-1.5 1.5S7.21 12 8 12zm8 0c.79 0 1.5-.71 1.5-1.5S16.79 9 16 9s-1.5.71-1.5 1.5.71 1.5 1.5 1.5zm-4 4c2.21 0 4-1.79 4-4h-8c0 2.21 1.79 4 4 4z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="emoji-popup" id="emojiPopup">
+                    <div class="emoji-grid">
+                        <button class="emoji-btn" data-emoji="💖">💖</button>
+                        <button class="emoji-btn" data-emoji="⭐">⭐</button>
+                        <button class="emoji-btn" data-emoji="🌈">🌈</button>
+                        <button class="emoji-btn" data-emoji="🦄">🦄</button>
+                        <button class="emoji-btn" data-emoji="❄️">❄️</button>
+                        <button class="emoji-btn" data-emoji="💩">💩</button>
+                        <button class="emoji-btn" data-emoji="🌺">🌺</button>
+                        <button class="emoji-btn" data-emoji="🦋">🦋</button>
+                        <button class="emoji-btn" data-emoji="🔥">🔥</button>
+                        <button class="emoji-btn" data-emoji="🌸">🌸</button>
+                        <button class="emoji-btn" data-emoji="✨">✨</button>
+                        <button class="emoji-btn" data-emoji="🚀">🚀</button>
+                    </div>
+                </div>
+                <div class="controls-section">
+                    <div class="slider-group">
+                        <div class="width-control" title="Line Width">
+                            <label for="lineWidth" class="icon-label">
+                                <svg viewBox="0 0 120 24" width="120" height="24">
+                                    <circle cx="8" cy="12" r="2" fill="currentColor"/>
+                                    <text x="60" y="17" font-size="14" fill="currentColor" text-anchor="middle" id="widthValueSvg">10</text>
+                                    <circle cx="112" cy="12" r="6" fill="currentColor"/>
+                                </svg>
+                            </label>
+                            <input type="range" id="lineWidth" min="2" max="32" value="10" step="6">
+                        </div>
+                        <div class="segment-control" title="Number of Segments">
+                            <label for="segmentCount" class="icon-label">
+                                <svg viewBox="0 0 120 24" width="120" height="24">
+                                    <text x="4" y="17" font-size="16" fill="currentColor">+</text>
+                                    <text x="60" y="17" font-size="14" fill="currentColor" text-anchor="middle" id="segmentValueSvg">8</text>
+                                    <text x="108" y="22" font-size="20" fill="currentColor">*</text>
+                                </svg>
+                            </label>
+                            <input type="range" id="segmentCount" min="2" max="8" value="8" step="2">
+                        </div>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="mirror-control" title="Mirror Alternate Segments">
+                            <label>
+                                <input type="checkbox" id="mirrorSegments" checked>
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path fill="none" stroke="currentColor" stroke-width="2" d="M12 4v16M4 12h7M13 12h7M8 9l-4 3 4 3M16 9l4 3-4 3"/>
+                                </svg>
+                            </label>
+                        </div>
+                        <div class="dark-mode-control" title="Dark Background">
+                            <label>
+                                <input type="checkbox" id="darkMode">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path fill="currentColor" d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z"/>
+                                    <path fill="currentColor" d="M12 5v14c3.86 0 7-3.14 7-7s-3.14-7-7-7z"/>
+                                </svg>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="clear-control">
+                        <button id="clearCanvas" title="Clear Canvas">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
