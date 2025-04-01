@@ -1,0 +1,270 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.drawing-pane {
+    flex: 1;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+#drawingCanvas {
+    width: 100%;
+    height: 100%;
+}
+
+.color-picker-pane {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background-color: rgba(240, 240, 240, 0.95);
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.control-group {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.color-section {
+    flex: 0 0 360px;
+}
+
+.controls-section {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    justify-content: space-around;
+    max-width: 800px;
+}
+
+.slider-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.width-control,
+.segment-control {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.width-control {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 1px solid #eee;
+}
+
+.segment-control {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.color-options {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    max-width: 360px;
+    padding: 5px;
+    background: #fff;
+    border-radius: 4px;
+}
+
+.color-btn {
+    width: 36px;
+    height: 36px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+    padding: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.color-btn:hover {
+    transform: scale(1.1);
+}
+
+.color-btn.active {
+    border: 3px solid #000;
+    transform: scale(1.1);
+}
+
+/* Special styling for white color button to make it visible */
+.color-btn[data-color="#FFFFFF"] {
+    border: 2px solid #ccc;
+}
+
+.color-btn[data-color="#FFFFFF"].active {
+    border: 3px solid #666;
+}
+
+.emoji-picker svg {
+    width: 24px;
+    height: 24px;
+}
+
+.emoji-popup {
+    display: none;
+    position: absolute;
+    bottom: 140px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+}
+
+.emoji-popup.show {
+    display: block;
+}
+
+.emoji-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    max-width: 200px;
+}
+
+.emoji-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.emoji-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.emoji-btn.active {
+    background-color: #e0e0e0;
+}
+
+.special-brush svg {
+    width: 24px;
+    height: 24px;
+}
+
+.icon-label {
+    display: flex;
+    align-items: center;
+    color: #666;
+}
+
+.icon-label svg {
+    width: 120px;
+    height: 24px;
+}
+
+#lineWidth,
+#segmentCount {
+    width: 120px;
+    cursor: pointer;
+}
+
+.mirror-control,
+.dark-mode-control {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.mirror-control label,
+.dark-mode-control label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.mirror-control svg,
+.dark-mode-control svg {
+    width: 24px;
+    height: 24px;
+    color: #666;
+}
+
+.mirror-control input[type="checkbox"],
+.dark-mode-control input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin-right: 0;
+}
+
+#clearCanvas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    background-color: #fff;
+    border: 1px solid #999;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#clearCanvas:hover {
+    background-color: #f0f0f0;
+    border-color: #666;
+}
+
+#clearCanvas:active {
+    background-color: #e0e0e0;
+    transform: translateY(1px);
+}
+
+#clearCanvas svg {
+    width: 24px;
+    height: 24px;
+    color: #666;
+}
