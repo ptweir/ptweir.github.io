@@ -341,12 +341,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // Store last points for each segment
     let lastPoints = new Array(numSegments).fill(null);
 
+    // Get event point helper function
+    function getEventPoint(e) {
+        let clientX, clientY;
+        
+        if (e.touches) {
+            if (e.touches.length !== 1) return null;
+            clientX = e.touches[0].clientX;
+            clientY = e.touches[0].clientY;
+        } else {
+            clientX = e.clientX;
+            clientY = e.clientY;
+        }
+        
+        const rect = canvas.getBoundingClientRect();
+        return {
+            x: clientX - rect.left,
+            y: clientY - rect.top
+        };
+    }
+
     // Drawing functionality
     function startDrawing(e) {
+        const point = getEventPoint(e);
+        if (!point) return;
+        
         isDrawing = true;
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
         lastPoints = new Array(numSegments).fill(null);
         if (isRandomMode) {
             applyRandomOption();
@@ -362,11 +382,33 @@ document.addEventListener('DOMContentLoaded', () => {
     function draw(e) {
         if (!isDrawing) return;
 
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        const point = getEventPoint(e);
+        if (!point) return;
+        
+        drawMirroredPoint(point.x, point.y);
+    }
 
-        drawMirroredPoint(x, y);
+    // Touch event handlers
+    let lastTouchTime = 0;
+    const TOUCH_THROTTLE = 16; // About 60fps
+
+    function handleTouchStart(e) {
+        e.preventDefault();
+        startDrawing(e);
+    }
+
+    function handleTouchMove(e) {
+        e.preventDefault();
+        const now = Date.now();
+        if (now - lastTouchTime < TOUCH_THROTTLE) return;
+        lastTouchTime = now;
+        
+        draw(e);
+    }
+
+    function handleTouchEnd(e) {
+        e.preventDefault();
+        stopDrawing();
     }
 
     // Event listeners for drawing
@@ -374,4 +416,15 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.addEventListener('mousemove', draw);
     canvas.addEventListener('mouseup', stopDrawing);
     canvas.addEventListener('mouseout', stopDrawing);
+
+    // Touch event listeners
+    canvas.addEventListener('touchstart', handleTouchStart);
+    canvas.addEventListener('touchmove', handleTouchMove);
+    canvas.addEventListener('touchend', handleTouchEnd);
+    canvas.addEventListener('touchcancel', handleTouchEnd);
+
+    // Prevent drawing when interacting with controls
+    const controlPanel = document.querySelector('.control-panel');
+    controlPanel.addEventListener('touchstart', e => e.stopPropagation());
+    controlPanel.addEventListener('touchmove', e => e.stopPropagation());
 });
