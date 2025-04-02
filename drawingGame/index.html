@@ -32,14 +32,14 @@
                         <button class="color-btn" style="background-color: #9FE2BF" data-color="#9FE2BF"></button>
                         <button class="color-btn" style="background-color: #FF1493" data-color="#FF1493"></button>
                         <button class="color-btn" style="background-color: #9B30FF" data-color="#9B30FF"></button>
-                        <button class="color-btn special-brush random-picker" data-color="random">
-                            <svg viewBox="0 0 24 24" width="24" height="24">
-                                <path fill="#666" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-                            </svg>
-                        </button>
                         <button class="color-btn emoji-picker" data-color="emoji">
                             <svg viewBox="0 0 24 24" width="24" height="24">
                                 <path fill="#666" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-4-8c.79 0 1.5-.71 1.5-1.5S8.79 9 8 9s-1.5.71-1.5 1.5S7.21 12 8 12zm8 0c.79 0 1.5-.71 1.5-1.5S16.79 9 16 9s-1.5.71-1.5 1.5.71 1.5 1.5 1.5zm-4 4c2.21 0 4-1.79 4-4h-8c0 2.21 1.79 4 4 4z"/>
+                            </svg>
+                        </button>
+                        <button class="color-btn special-brush random-picker" data-color="random">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="#666" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
                             </svg>
                         </button>
                     </div>
@@ -63,24 +63,24 @@
                 <div class="controls-section">
                     <div class="slider-group">
                         <div class="width-control" title="Line Width">
+                            <input type="range" id="lineWidth" min="2" max="32" value="10" step="6">
                             <label for="lineWidth" class="icon-label">
-                                <svg viewBox="0 0 120 24" width="120" height="24">
-                                    <circle cx="8" cy="12" r="2" fill="currentColor"/>
-                                    <text x="60" y="17" font-size="14" fill="currentColor" text-anchor="middle" id="widthValueSvg">10</text>
-                                    <circle cx="112" cy="12" r="6" fill="currentColor"/>
+                                <svg viewBox="0 0 80 12" width="80" height="12">
+                                    <circle cx="10" cy="6" r="2" fill="currentColor"/>
+                                    <text x="40" y="8" font-size="10" fill="currentColor" text-anchor="middle" id="widthValueSvg">10</text>
+                                    <circle cx="70" cy="6" r="4" fill="currentColor"/>
                                 </svg>
                             </label>
-                            <input type="range" id="lineWidth" min="2" max="32" value="10" step="6">
                         </div>
                         <div class="segment-control" title="Number of Segments">
+                            <input type="range" id="segmentCount" min="2" max="8" value="8" step="2">
                             <label for="segmentCount" class="icon-label">
-                                <svg viewBox="0 0 120 24" width="120" height="24">
-                                    <text x="4" y="17" font-size="16" fill="currentColor">+</text>
-                                    <text x="60" y="17" font-size="14" fill="currentColor" text-anchor="middle" id="segmentValueSvg">8</text>
-                                    <text x="108" y="22" font-size="20" fill="currentColor">*</text>
+                                <svg viewBox="0 0 80 12" width="80" height="12">
+                                    <text x="10" y="9" font-size="12" fill="currentColor">+</text>
+                                    <text x="40" y="8" font-size="10" fill="currentColor" text-anchor="middle" id="segmentValueSvg">8</text>
+                                    <text x="70" y="10" font-size="14" fill="currentColor">*</text>
                                 </svg>
                             </label>
-                            <input type="range" id="segmentCount" min="2" max="8" value="8" step="2">
                         </div>
                     </div>
                     <div class="checkbox-group">
