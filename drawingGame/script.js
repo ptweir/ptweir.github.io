@@ -184,9 +184,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // All available colors (excluding special brushes)
     const availableColors = [
         // Warm Colors
-        '#FF355E', // Bright Red (like raspberry)
+        '#FF355E', // Bright Red (raspberry)
         '#FF69B4', // Hot Pink
-        '#FF7F50', // Coral
         '#FF8C00', // Dark Orange
         '#FFD700', // Gold Yellow
         
@@ -194,14 +193,13 @@ document.addEventListener('DOMContentLoaded', () => {
         '#2ECCB9', // Teal
         '#00CED1', // Turquoise
         '#1E90FF', // Bright Blue
-        '#4169E1', // Royal Blue
         '#8A2BE2', // Blue Violet
         
         // Fresh/Fun Colors
         '#32CD32', // Lime Green
         '#9FE2BF', // Seafoam Green
         '#FF1493', // Deep Pink
-        '#9B30FF'  // Purple
+        '#B784FF'  // Lilac
     ];
 
     // All available emojis
