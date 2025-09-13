@@ -1,0 +1,503 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: linear-gradient(135deg, #87CEEB 0%, #98FB98 100%);
+    min-height: 100vh;
+    overflow: hidden;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Screen management */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.screen.active {
+    display: flex;
+}
+
+.content {
+    text-align: center;
+    max-width: 90%;
+}
+
+/* Welcome Screen */
+.game-title {
+    font-size: 3rem;
+    color: #FF6B6B;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    margin-bottom: 1rem;
+    animation: bounce 2s infinite;
+}
+
+.game-subtitle {
+    font-size: 1.5rem;
+    color: #4ECDC4;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Buttons */
+.big-button {
+    font-size: 1.5rem;
+    padding: 15px 30px;
+    background: linear-gradient(45deg, #FF6B6B, #FFE66D);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    margin: 10px;
+}
+
+.big-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.big-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.big-button.secondary {
+    background: linear-gradient(45deg, #4ECDC4, #45B7B8);
+}
+
+.control-button {
+    font-size: 1rem;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #4ECDC4, #45B7B8);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    margin: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.control-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+}
+
+/* Maze Screen */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 600px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.basket-counter, .maze-counter {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.maze-instruction {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.maze-instruction p {
+    font-size: 1.1rem;
+    color: #333;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+#maze-canvas {
+    border: 4px solid #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    background: white;
+    touch-action: none;
+}
+
+.maze-controls {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Food Selection Screen */
+.food-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+    max-width: 500px;
+}
+
+.food-item {
+    background: transparent;
+    border: none;
+    border-radius: 15px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.food-item:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.food-item.selected {
+    background: rgba(255, 107, 107, 0.2);
+    transform: scale(1.15);
+    box-shadow: 0 6px 16px rgba(255, 107, 107, 0.3);
+}
+
+.food-emoji {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.food-name {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.food-controls {
+    margin-top: 20px;
+}
+
+/* Picnic Screen */
+#picnic-screen {
+    position: relative;
+    background-image: url('../picnic_scene_3_flower_meadow_with_basket.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+#picnic-screen .content {
+    position: relative;
+    z-index: 2;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 20px;
+}
+
+/* Picnic Bottom Banner */
+.picnic-banner {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to top, rgba(139, 69, 19, 0.9), rgba(139, 69, 19, 0.7));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    border-top: 3px solid #8B4513;
+}
+
+/* Basket overlay area - positioned to match background basket */
+.picnic-basket {
+    position: absolute;
+    bottom: 10%; /* Adjust to match background basket position */
+    left: 2%; /* Adjust to match background basket position */
+    width: 300px;
+    height: 200px;
+    background: transparent; /* No visual background - basket is in image */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 15px;
+    z-index: 50;
+}
+
+/* Food items in basket */
+.basket-food {
+    width: 140px;
+    height: 140px;
+    background: transparent;
+    border: none;
+    border-radius: 15px;
+    padding: 8px;
+    text-align: center;
+    cursor: pointer;
+    touch-action: none;
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 51;
+}
+
+.basket-food:hover {
+    transform: scale(1.1);
+}
+
+.basket-food.dragging {
+    z-index: 1000;
+    transform: scale(1.2);
+    opacity: 0.8;
+}
+
+.basket-food .food-emoji {
+    font-size: 6rem;
+    line-height: 1;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.basket-food .food-name {
+    font-size: 1rem;
+    color: #333;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+}
+
+/* Placed food items on blanket */
+.placed-food {
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    background: transparent;
+    border: none;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    touch-action: none;
+    z-index: 30;
+    transition: transform 0.2s ease;
+}
+
+.placed-food:hover {
+    transform: scale(1.1);
+}
+
+.placed-food.dragging {
+    z-index: 1000;
+    transform: scale(1.2);
+    opacity: 0.8;
+}
+
+.placed-food .food-emoji {
+    font-size: 10rem;
+    line-height: 1;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.placed-food .food-name {
+    font-size: 1.4rem;
+    color: #333;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+    line-height: 1;
+}
+
+/* Blanket drop zone - covers bottom half of screen */
+.blanket-area {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    z-index: 20;
+    pointer-events: none; /* Allow clicks to pass through */
+}
+
+.blanket-area.drop-active {
+    background: rgba(255, 255, 255, 0.2);
+    border: 3px dashed rgba(255, 255, 255, 0.6);
+    pointer-events: none;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Success Message */
+.success-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(45deg, #FFE66D, #FF6B6B);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.success-message.show {
+    opacity: 1;
+    animation: successPulse 0.6s ease;
+}
+
+.success-message h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.success-message p {
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+@keyframes successPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .game-title {
+        font-size: 2.5rem;
+    }
+    
+    .game-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .big-button {
+        font-size: 1.3rem;
+        padding: 12px 25px;
+    }
+    
+    .game-header {
+        padding: 8px 15px;
+    }
+    
+    .basket-counter, .maze-counter {
+        font-size: 1rem;
+    }
+    
+    .food-grid {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 10px;
+    }
+    
+    .food-emoji {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-title {
+        font-size: 2rem;
+    }
+    
+    .big-button {
+        font-size: 1.1rem;
+        padding: 10px 20px;
+    }
+    
+    .food-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Landscape mode adjustments */
+@media (orientation: landscape) and (max-height: 600px) {
+    .screen {
+        padding: 10px;
+    }
+    
+    .game-title {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .game-subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .maze-instruction {
+        margin-bottom: 10px;
+    }
+    
+    .maze-controls {
+        margin-top: 10px;
+    }
+}
