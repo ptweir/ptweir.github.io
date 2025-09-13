@@ -335,7 +335,64 @@ class Game {
 // Initialize game when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     window.game = new Game();
+    
+    // Prevent swipe-back navigation
+    preventSwipeBack();
 });
+
+// Prevent swipe-back gestures that confuse kids
+function preventSwipeBack() {
+    let startX = 0;
+    let startY = 0;
+    
+    // Prevent swipe-back on document edges
+    document.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        
+        // If touch starts near left edge, prevent potential swipe-back
+        if (startX < 50) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+    
+    document.addEventListener('touchmove', (e) => {
+        const currentX = e.touches[0].clientX;
+        const currentY = e.touches[0].clientY;
+        const deltaX = currentX - startX;
+        const deltaY = currentY - startY;
+        
+        // Prevent horizontal swipes from left edge (swipe-back gesture)
+        if (startX < 50 && deltaX > 0 && Math.abs(deltaX) > Math.abs(deltaY)) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        // Prevent vertical swipes (pull-to-refresh)
+        if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+    
+    // Prevent browser back button navigation
+    history.pushState(null, '', location.href);
+    window.addEventListener('popstate', (e) => {
+        history.pushState(null, '', location.href);
+    });
+    
+    // Prevent keyboard navigation that might confuse kids
+    document.addEventListener('keydown', (e) => {
+        // Prevent backspace navigation
+        if (e.key === 'Backspace' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+            e.preventDefault();
+        }
+        
+        // Prevent Alt+Left/Right navigation
+        if (e.altKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+            e.preventDefault();
+        }
+    });
+}
 
 // Prevent zoom on double tap for mobile
 document.addEventListener('touchend', (e) => {
@@ -357,4 +414,26 @@ document.addEventListener('contextmenu', (e) => {
 // Prevent text selection
 document.addEventListener('selectstart', (e) => {
     e.preventDefault();
+});
+
+// Additional mobile optimizations
+document.addEventListener('DOMContentLoaded', () => {
+    // Prevent iOS bounce/rubber band effect
+    document.body.addEventListener('touchstart', (e) => {
+        if (e.target === document.body) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+    
+    document.body.addEventListener('touchend', (e) => {
+        if (e.target === document.body) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+    
+    document.body.addEventListener('touchmove', (e) => {
+        if (e.target === document.body) {
+            e.preventDefault();
+        }
+    }, { passive: false });
 });
