@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+    
+    <!-- Mobile Web App Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SkyBird Nest Builder">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#87CEEB">
+    
+    <!-- Prevent zooming and selection -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    
+    <!-- SEO and Description -->
+    <meta name="description" content="SkyBird Nest Builder - A peaceful puzzle game for children aged 4-8">
+    <meta name="keywords" content="game, mobile, puzzle, nest, building, children, educational">
+    <meta name="author" content="SkyBird Game">
+    
+    <title>SkyBird Nest Builder</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/icon-192x192.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Game Container -->
+    <div id="gameContainer" class="game-container">
+        <!-- Game Canvas -->
+        <canvas id="gameCanvas" class="game-canvas"></canvas>
+        
+        <!-- UI Overlay -->
+        <div id="uiOverlay" class="ui-overlay">
+            <!-- Start Screen -->
+            <div id="startScreen" class="screen start-screen active">
+                <div class="logo">
+                    <h1>🐦 SkyBird</h1>
+                    <p class="subtitle">Nest Builder</p>
+                </div>
+                <div class="menu">
+                    <button id="playBtn" class="btn btn-primary">🏗️ Build a Nest</button>
+                    <button id="instructionsBtn" class="btn btn-secondary">📖 How to Play</button>
+                </div>
+                <div class="age-info">
+                    <p>👶 Perfect for ages 4-8</p>
+                </div>
+            </div>
+            
+            <!-- Game Screen -->
+            <div id="gameScreen" class="screen game-screen">
+                <div class="hud">
+                    <div class="progress-info">
+                        <span id="progressText">Building Progress: 0%</span>
+                    </div>
+                    <button id="pauseBtn" class="btn btn-pause">⏸️</button>
+                </div>
+                
+                <!-- Game Instructions Overlay -->
+                <div class="game-instructions">
+                    <div class="game-hint">Drag sticks to build the nest!</div>
+                </div>
+                
+                <!-- Touch area for compatibility -->
+                <div id="tapArea" class="tap-area" style="display: none;"></div>
+            </div>
+            
+            <!-- Pause Screen -->
+            <div id="pauseScreen" class="screen pause-screen">
+                <div class="pause-menu">
+                    <h2>⏸️ Paused</h2>
+                    <p>Take your time building!</p>
+                    <button id="resumeBtn" class="btn btn-primary">▶️ Continue Building</button>
+                    <button id="restartBtn" class="btn btn-secondary">🔄 Start Over</button>
+                    <button id="homeBtn" class="btn btn-secondary">🏠 Home</button>
+                </div>
+            </div>
+            
+            <!-- Completed Screen -->
+            <div id="completedScreen" class="screen completed-screen">
+                <div class="completed-menu">
+                    <h2>🎉 Nest Complete!</h2>
+                    <div class="celebration-text">
+                        <p>🐣 Great job building the nest!</p>
+                        <p>🌟 The birds are very happy!</p>
+                    </div>
+                    <button id="playAgainBtn" class="btn btn-primary">🏗️ Build Another Nest</button>
+                    <button id="mainMenuBtn" class="btn btn-secondary">🏠 Main Menu</button>
+                </div>
+            </div>
+            
+            <!-- Instructions Screen -->
+            <div id="instructionsScreen" class="screen instructions-screen">
+                <div class="instructions-content">
+                    <h2>🐦 How to Build a Nest</h2>
+                    <div class="instructions-text">
+                        <div class="instruction-item">
+                            <span class="instruction-icon">👆</span>
+                            <p>Touch and drag sticks from the bottom</p>
+                        </div>
+                        <div class="instruction-item">
+                            <span class="instruction-icon">🎯</span>
+                            <p>Drop them in the right spots to build the nest</p>
+                        </div>
+                        <div class="instruction-item">
+                            <span class="instruction-icon">🔧</span>
+                            <p>Use different stick types: straight, curved, and Y-shaped</p>
+                        </div>
+                        <div class="instruction-item">
+                            <span class="instruction-icon">✨</span>
+                            <p>Sticks will snap into place when you're close!</p>
+                        </div>
+                        <div class="instruction-item">
+                            <span class="instruction-icon">🎉</span>
+                            <p>Complete the nest to celebrate!</p>
+                        </div>
+                    </div>
+                    <div class="encouragement">
+                        <p>💝 No rushing, no failing - just fun building!</p>
+                    </div>
+                    <button id="backBtn" class="btn btn-primary">🔙 Back</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Loading Screen -->
+        <div id="loadingScreen" class="loading-screen">
+            <div class="loading-content">
+                <div class="loading-spinner">🐦</div>
+                <p>Loading SkyBird Nest Builder...</p>
+                <div class="loading-bar">
+                    <div class="loading-progress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,583 @@
+/* SkyBird Nest Builder - Child-Friendly Mobile-First Styles */
+
+/* CSS Custom Properties */
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #FF9800;
+    --accent-color: #2196F3;
+    --success-color: #8BC34A;
+    --background-color: #87CEEB;
+    --text-color: #2E7D32;
+    --white: #FFFFFF;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --border-radius: 16px;
+    --transition: all 0.3s ease;
+    
+    /* Game specific colors */
+    --sky-gradient: linear-gradient(180deg, #87CEEB 0%, #98D8E8 100%);
+    --button-gradient: linear-gradient(145deg, #4CAF50, #45a049);
+    --button-shadow: 0 6px 16px rgba(76, 175, 80, 0.3);
+    --orange-gradient: linear-gradient(145deg, #FF9800, #F57C00);
+    --blue-gradient: linear-gradient(145deg, #2196F3, #1976D2);
+}
+
+/* Game Container */
+.game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    background: var(--sky-gradient);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Comic Sans MS', 'Trebuchet MS', cursive, sans-serif;
+}
+
+/* Game Canvas */
+.game-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    touch-action: none;
+}
+
+/* UI Overlay */
+.ui-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* Screen Base Styles */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    pointer-events: none;
+    padding: 20px;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 36px;
+    margin: 10px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+    min-width: 140px;
+    min-height: 60px; /* Extra touch-friendly for children */
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    font-family: inherit;
+}
+
+.btn:active {
+    transform: translateY(3px) scale(0.98);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background: var(--button-gradient);
+    color: var(--white);
+    box-shadow: var(--button-shadow);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(145deg, #45a049, #4CAF50);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: var(--orange-gradient);
+    color: var(--white);
+    box-shadow: 0 6px 16px rgba(255, 152, 0, 0.3);
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(145deg, #F57C00, #FF9800);
+    transform: translateY(-2px);
+}
+
+.btn-pause {
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--text-color);
+    padding: 14px;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: var(--shadow);
+}
+
+/* Start Screen */
+.start-screen {
+    background: rgba(135, 206, 235, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.logo h1 {
+    font-size: clamp(3.5rem, 10vw, 6rem);
+    font-weight: 800;
+    color: var(--white);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--white);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 3rem;
+    font-weight: 600;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.age-info {
+    margin-top: 2rem;
+    padding: 16px 24px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.age-info p {
+    font-size: 18px;
+    color: var(--text-color);
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Game Screen */
+.game-screen {
+    pointer-events: none;
+}
+
+.game-screen.active {
+    pointer-events: all;
+}
+
+.hud {
+    position: absolute;
+    top: env(safe-area-inset-top, 20px);
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 20;
+    pointer-events: all;
+}
+
+.progress-info {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 14px 24px;
+    border-radius: var(--border-radius);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-color);
+    box-shadow: var(--shadow);
+}
+
+/* Game Instructions */
+.game-instructions {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 15;
+    pointer-events: none;
+}
+
+.game-hint {
+    background: rgba(255, 193, 7, 0.95);
+    color: var(--text-color);
+    padding: 16px 24px;
+    border-radius: var(--border-radius);
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    box-shadow: var(--shadow);
+    animation: gentlePulse 3s infinite;
+    transition: opacity 0.5s ease;
+}
+
+@keyframes gentlePulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.05); }
+}
+
+/* Touch Controls */
+.touch-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    pointer-events: all;
+}
+
+.tap-area {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    touch-action: none;
+}
+
+/* Pause Screen */
+.pause-screen {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.pause-menu {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 40px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: var(--shadow);
+    max-width: 320px;
+    width: 90%;
+}
+
+.pause-menu h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.pause-menu p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    opacity: 0.8;
+}
+
+/* Completed Screen */
+.completed-screen {
+    background: rgba(76, 175, 80, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.completed-menu {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 40px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: var(--shadow);
+    max-width: 350px;
+    width: 90%;
+}
+
+.completed-menu h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--success-color);
+    animation: celebrate 2s ease-in-out infinite;
+}
+
+@keyframes celebrate {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.celebration-text {
+    margin-bottom: 2rem;
+}
+
+.celebration-text p {
+    font-size: 1.3rem;
+    margin: 1rem 0;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+/* Instructions Screen */
+.instructions-screen {
+    background: rgba(33, 150, 243, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.instructions-content {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 40px;
+    border-radius: var(--border-radius);
+    text-align: left;
+    box-shadow: var(--shadow);
+    max-width: 400px;
+    width: 90%;
+}
+
+.instructions-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.instruction-item {
+    display: flex;
+    align-items: flex-start;
+    margin: 1.5rem 0;
+    gap: 12px;
+}
+
+.instruction-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.instruction-item p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.encouragement {
+    background: rgba(255, 193, 7, 0.2);
+    padding: 16px;
+    border-radius: 12px;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.encouragement p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Loading Screen */
+.loading-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--sky-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    opacity: 1;
+    visibility: visible;
+    transition: var(--transition);
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loading-content {
+    text-align: center;
+    color: var(--white);
+}
+
+.loading-spinner {
+    font-size: 4rem;
+    animation: bounce 1.5s ease-in-out infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.loading-content p {
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
+
+.loading-bar {
+    width: 200px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.loading-progress {
+    height: 100%;
+    background: var(--white);
+    width: 0;
+    animation: loadingProgress 2s ease-in-out infinite;
+}
+
+@keyframes loadingProgress {
+    0% { width: 0; }
+    50% { width: 70%; }
+    100% { width: 100%; }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .btn {
+        padding: 16px 32px;
+        font-size: 18px;
+        min-width: 120px;
+        min-height: 56px;
+    }
+    
+    .logo h1 {
+        font-size: clamp(3rem, 12vw, 5rem);
+    }
+    
+    .subtitle {
+        font-size: clamp(1.2rem, 5vw, 2rem);
+    }
+    
+    .pause-menu, .completed-menu, .instructions-content {
+        padding: 30px 20px;
+        width: 95%;
+    }
+    
+    .hud {
+        top: env(safe-area-inset-top, 15px);
+        left: 15px;
+        right: 15px;
+    }
+    
+    .progress-info {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+    
+    .btn-pause {
+        width: 50px;
+        height: 50px;
+        font-size: 16px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 360px) {
+    .btn {
+        padding: 14px 28px;
+        font-size: 16px;
+        min-width: 110px;
+        min-height: 52px;
+    }
+    
+    .menu {
+        gap: 16px;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (orientation: landscape) and (max-height: 500px) {
+    .logo h1 {
+        font-size: clamp(2.5rem, 8vh, 4rem);
+        margin-bottom: 0.5rem;
+    }
+    
+    .subtitle {
+        font-size: clamp(1rem, 3vh, 1.5rem);
+        margin-bottom: 2rem;
+    }
+    
+    .menu {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+    }
+    
+    .pause-menu, .completed-menu, .instructions-content {
+        padding: 20px;
+        max-width: 450px;
+    }
+    
+    .age-info {
+        margin-top: 1rem;
+    }
+}
+
+/* Safe area adjustments for notched devices */
+@supports (padding: max(0px)) {
+    .hud {
+        top: max(env(safe-area-inset-top), 20px);
+        left: max(env(safe-area-inset-left), 20px);
+        right: max(env(safe-area-inset-right), 20px);
+    }
+    
+    .screen {
+        padding: max(env(safe-area-inset-top), 20px) max(env(safe-area-inset-right), 20px) max(env(safe-area-inset-bottom), 20px) max(env(safe-area-inset-left), 20px);
+    }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    .btn, .screen, .game-hint, .loading-spinner {
+        animation: none;
+        transition: none;
+    }
+    
+    .completed-menu h2 {
+        animation: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        --text-color: #000;
+    }
+    
+    .btn {
+        border: 2px solid #000;
+    }
+}
