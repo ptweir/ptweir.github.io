@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+    
+    <!-- Mobile Web App Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SkyBird">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#87CEEB">
+    
+    <!-- Prevent zooming and selection -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    
+    <!-- SEO and Description -->
+    <meta name="description" content="SkyBird - A fun mobile-first flying game">
+    <meta name="keywords" content="game, mobile, flying, bird, skybird">
+    <meta name="author" content="SkyBird Game">
+    
+    <title>SkyBird Game</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/icon-192x192.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Game Container -->
+    <div id="gameContainer" class="game-container">
+        <!-- Game Canvas -->
+        <canvas id="gameCanvas" class="game-canvas"></canvas>
+        
+        <!-- UI Overlay -->
+        <div id="uiOverlay" class="ui-overlay">
+            <!-- Start Screen -->
+            <div id="startScreen" class="screen start-screen active">
+                <div class="logo">
+                    <h1>SkyBird</h1>
+                </div>
+                <div class="menu">
+                    <button id="playBtn" class="btn btn-primary">Play</button>
+                    <button id="instructionsBtn" class="btn btn-secondary">How to Play</button>
+                </div>
+            </div>
+            
+            <!-- Game Screen -->
+            <div id="gameScreen" class="screen game-screen">
+                <div class="hud">
+                    <div class="score">
+                        <span id="currentScore">0</span>
+                    </div>
+                    <button id="pauseBtn" class="btn btn-pause">⏸</button>
+                </div>
+                
+                <!-- Touch Controls -->
+                <div class="touch-controls">
+                    <div id="tapArea" class="tap-area">
+                        <span class="tap-hint">Tap to Fly</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pause Screen -->
+            <div id="pauseScreen" class="screen pause-screen">
+                <div class="pause-menu">
+                    <h2>Paused</h2>
+                    <button id="resumeBtn" class="btn btn-primary">Resume</button>
+                    <button id="restartBtn" class="btn btn-secondary">Restart</button>
+                    <button id="homeBtn" class="btn btn-secondary">Home</button>
+                </div>
+            </div>
+            
+            <!-- Game Over Screen -->
+            <div id="gameOverScreen" class="screen game-over-screen">
+                <div class="game-over-menu">
+                    <h2>Game Over</h2>
+                    <div class="final-score">
+                        <span>Score: <span id="finalScore">0</span></span>
+                    </div>
+                    <div class="high-score">
+                        <span>Best: <span id="highScore">0</span></span>
+                    </div>
+                    <button id="playAgainBtn" class="btn btn-primary">Play Again</button>
+                    <button id="mainMenuBtn" class="btn btn-secondary">Main Menu</button>
+                </div>
+            </div>
+            
+            <!-- Instructions Screen -->
+            <div id="instructionsScreen" class="screen instructions-screen">
+                <div class="instructions-content">
+                    <h2>How to Play</h2>
+                    <div class="instructions-text">
+                        <p>🐦 Tap the screen to make the bird fly</p>
+                        <p>🚫 Avoid hitting obstacles</p>
+                        <p>⭐ Collect points by flying through gaps</p>
+                        <p>🏆 Try to beat your high score!</p>
+                    </div>
+                    <button id="backBtn" class="btn btn-primary">Back</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Loading Screen -->
+        <div id="loadingScreen" class="loading-screen">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <p>Loading SkyBird...</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
